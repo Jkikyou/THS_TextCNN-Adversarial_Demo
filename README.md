@@ -1,0 +1,84 @@
+# THS_TextCNN-Adversarial_Demo
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/elijahcn/TextCNN-AdversarialTraining/blob/main/LICENSE)
+
+
+## 概述
+ 同花顺面试编程Demo, 中文文本分类的对抗训练都是在Embedding数据上进行(FGSM、PGD、FreeAT)扰动。
+
+### 软件环境
+python 3.7  
+pytorch 1.9  
+tqdm  
+sklearn  
+
+### 目录结构
+    run.py          # 运行主程序
+    train_eval.py   # 训练和评测代码
+    utils.py    `   # 数据集处理和词向量生成
+    models/         # 各模型代码, 超参定义和模型定义在同一文件中。  
+        TextCNN.py  # TextCNN文本分类模型
+        FGM.py      # FGM 对抗训练模型
+        FGSM.py     # FGSM 对抗训练模型
+        PGD.py      # PGD 对抗训练模型
+        FreeAT.py   # FreeAT 对抗训练模型
+    THUCNEWS/       # THUCNEWS数据集和运行结果
+        data/       # 训练测试数据集
+            train.txt   # 训练数据集
+            dev.txt     # 开发数据集
+            test.txt    # 测试数据集
+            class.txt   # 类别定义
+            embedding_SougouNews.npz    # 从Sougou数据生成的词向量数据
+            vocab.pkl   # 词汇表数据
+        log/        # 输出log文件
+        ckpt/       # 输出模型文件
+    运行结果.xlsx   # 实验结果记录
+
+## 数据说明
+
+### 短文本分类中文数据集
+从[THUCNews](http://thuctc.thunlp.org/)中抽取了20万条新闻标题，文本长度在20到30之间。一共10个类别，每类2万条。
+
+类别：财经、房产、股票、教育、科技、社会、时政、体育、游戏、娱乐。
+
+数据集|数据量
+训练集|18万
+验证集|1万
+测试集|1万
+
+## 算法说明
+
+### Fast Gradient Method(FGM)
+
+### Projected Gradient Descent(PGD)
+
+### Free Adversarial Training(FreeAT)
+
+## 使用说明
+```
+# 训练并测试：
+# TextCNN + 无对抗训练
+python run.py 
+
+# TextCNN + FGSM
+python run.py --adv FGSM
+
+# TextCNN + PGD
+python run.py --adv PGD
+
+# TextCNN + FreeAT
+python run.py --adv FreeAT
+```
+
+
+## 参考
+[1] Explaining and Harnessing Adversarial Examples.  
+    https://arxiv.org/abs/1412.6572  
+[2] Adversarial Training Methods for Semi-Supervised Text Classification.    
+    https://arxiv.org/abs/1605.07725    
+[3] Fast is better than free: Revisiting adversarial training.    
+    https://arxiv.org/abs/2001.03994    
+[4] https://github.com/locuslab/fast_adversarial    
+[5] https://github.com/649453932/Chinese-Text-Classification-Pytorch    
+[6] FreeLB: Enhanced Adversarial Training for Natural Language Understanding.    
+    https://arxiv.org/pdf/1909.11764.pdf   
+[7] https://github.com/elijahcn/TextCNN-AdversarialTraining
